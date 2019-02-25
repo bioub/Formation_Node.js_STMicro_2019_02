@@ -2,6 +2,7 @@
 // random.js doit exporter les 2 fonctions alétoires
 // jeu.js doit importer la fonction getRandomIntInclusive et exporter la classe Jeu
 // index.js doit importer la classe Jeu et sera exécuté par node : node exercice/index.js
+const Jeu = require('./jeu');
 
 const partie = new Jeu();
 partie.jouer();

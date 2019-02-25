@@ -1,4 +1,5 @@
 const readline = require('readline');
+const random = require('./random');
 
 class Jeu {
   constructor(options = {}) {
@@ -45,3 +46,5 @@ class Jeu {
     });
   }
 }
+
+module.exports = Jeu;

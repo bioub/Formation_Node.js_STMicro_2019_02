@@ -5,3 +5,6 @@ function getRandomFloat(min, max) {
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
+
+exports.getRandomFloat = getRandomFloat;
+exports.getRandomInt = getRandomInt;
