@@ -1,4 +1,5 @@
 // (function (exports, require, module, __filename, __dirname) {
+'use strict';
 
 /**
  * Additionne 2 paramètres

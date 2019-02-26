@@ -10,7 +10,7 @@ const horlogeJsPath = path.resolve(srcPath, 'js', 'horloge.js');
 const indexJsPath = path.resolve(srcPath, 'js', 'index.js');
 const indexHtmlPath = path.resolve(srcPath, 'index.html');
 const indexHtmlDistPath = path.resolve(distPath, 'index.html');
-const appJsDistPath = path.resolve(distPath, 'app.js');
+let appJsDistPath = path.resolve(distPath, 'app.js');
 
 async function removeAndCreateDir(dirPath) {
   await fs.remove(dirPath);
@@ -26,23 +26,31 @@ async function buildJs() {
 
   let content = Buffer.concat(buffers).toString();
 
-  const result = UglifyJS.minify(content);
-  content = result.code;
+  if (process.argv.includes('--minify')) {
+    const result = UglifyJS.minify(content);
+    content = result.code;
+  }
 
-  const checksum = md5(content);
-  await fs.writeFile(appJsDistPath.replace('app.js', `app.${checksum}.js`), content);
+  let checksum;
+
+  // minimist, yargs, commander, inquirer
+  if (process.argv.includes('--md5')) {
+    checksum = md5(content);
+    appJsDistPath = appJsDistPath.replace('app.js', `app.${checksum}.js`)
+  }
+
+  await fs.writeFile(appJsDistPath, content);
   console.log('js built');
 
   return checksum;
 }
 
 async function buildHtml(checksum) {
+  const scriptTag = (checksum) ? `<script src="./app.${checksum}.js"></script>` : '<script src="./app.js"></script>';
+
   let content = await fs.readFile(indexHtmlPath, {encoding: 'UTF-8'});
   content = content.replace('<script src="./js/horloge.js"></script>', '')
-                   .replace(
-                     '<script src="./js/index.js"></script>',
-                     `<script src="./app.${checksum}.js"></script>`,
-                    );
+                   .replace('<script src="./js/index.js"></script>', scriptTag);
 
   await fs.writeFile(indexHtmlDistPath, content);
   console.log('html built');

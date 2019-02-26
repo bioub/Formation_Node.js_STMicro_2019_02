@@ -10,4 +10,5 @@ try {
 } catch (err) {
   console.log(chalk.red('Tests Contact FAILED'));
   console.log(chalk.red(err.message));
+  process.exit(1);
 }

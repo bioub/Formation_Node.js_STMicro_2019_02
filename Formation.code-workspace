@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "ModulesCommonJS"
+		},
+		{
+			"path": "FileSystem"
+		},
+		{
+			"path": "Exercice-Build"
+		}
+	],
+	"settings": {}
+}
