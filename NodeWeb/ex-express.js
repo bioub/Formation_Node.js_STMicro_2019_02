@@ -21,7 +21,7 @@ const app = express();
 // Retourne en JSON le tableaux todos
 // Status Code 200
 
-// GET /todos/2  (2 étant un paramètre)
+// DELETE /todos/2  (2 étant un paramètre)
 // Supprime l'élément dont l'id est dans l'URL (voir find, findIndex et splice sur MDN Array)
 // Retourne en JSON l'élément qui vient d'être supprimé
 // Status Code 200
