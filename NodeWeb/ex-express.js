@@ -1,4 +1,6 @@
 const express = require('express');
+const cors = require('cors');
+const morgan = require('morgan');
 
 const todos = [
   {
@@ -15,6 +17,15 @@ const todos = [
 
 const app = express();
 
+app.use(morgan('dev'));
+app.use(cors());
+/*
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
+*/
+
 // Créer 4 routes (à tester avec Postman et/ou l'application TodoWeb https://github.com/bioub/Formation_JavaScript_STMicro_2019_01)
 
 // GET /todos
@@ -28,14 +39,12 @@ app.get('/todos', (req, res) => {
 // Supprime l'élément dont l'id est dans l'URL (voir find, findIndex et splice sur MDN Array)
 // Retourne en JSON l'élément qui vient d'être supprimé
 // Status Code 200
-app.delete('/todos/:id', (req, res) => {
+app.delete('/todos/:id', (req, res, next) => {
   const todo = todos.find((t) => t.id === Number(req.params.id));
 
   if (!todo) {
-    res.statusCode = 404;
-    return res.json({
-      error: 'Todo not found',
-    });
+    req.notFoundReason = 'Todo not found';
+    return next();
   }
 
   const i = todos.indexOf(todo);
@@ -67,7 +76,8 @@ app.post('/todos', express.json(), (req, res) => {
 // En JSON : { error: 'Not Found' }
 // Status Code 404
 app.use((req, res) => {
-  res.json({ error: 'Not Found' });
+  res.statusCode = 404;
+  res.json({ error: req.notFoundReason || 'Not Found' });
 });
 
 app.listen(3000, () => {

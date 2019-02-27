@@ -2,8 +2,7 @@ const express = require('express');
 
 const app = express();
 
-// Middleware (callback comme associé à une route
-// mais qui n'envoit de réponse)
+// Middleware (callback intermédiaire)
 
 // Log Middleware
 app.use((req, res, next) => {
@@ -51,7 +50,14 @@ app.get('/api', (req, res) => {
 });
 
 // 404
+app.use('/api', (req, res) => {
+  res.sendStatus = 404;
+  res.json({error: 'CUSTOM 404'});
+});
+
+// 404
 app.use((req, res) => {
+  res.sendStatus = 404;
   res.send('CUSTOM 404');
 });
 
