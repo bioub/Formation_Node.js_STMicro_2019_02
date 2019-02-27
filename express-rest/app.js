@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 
 const contactRoutes = require('./routes/contact');
+const todoRoutes = require('./routes/todo');
 const userRoutes = require('./routes/user');
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(cors());
 
 // Routes
 app.use('/api/contacts', contactRoutes);
+app.use('/api/todos', todoRoutes);
 app.use('/api/users', userRoutes);
 
 app.use('/api', (req, res) => {

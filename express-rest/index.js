@@ -1,7 +1,10 @@
 const http = require('http');
+const mongoose = require('mongoose');
 
-const config = require('./config');
 const app  = require('./app');
+const config = require('./config');
+
+mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
 
 const server = http.createServer(app);
 
