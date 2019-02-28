@@ -48,7 +48,7 @@ describe('#random', () => {
   // describe('#getRandomFloat()', () => {
   //   it('should return a random float', () => {
   //     const mock = sinon.mock(Math);
-  //     mock.expects('random').returns(0.123);
+  //     mock.expects('random').withArgs().returns(0.123);
 
   //     expect(random.getRandomFloat(0, 100)).to.equal(12.3);
 
