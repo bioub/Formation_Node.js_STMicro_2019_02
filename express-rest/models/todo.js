@@ -53,6 +53,7 @@ const schema = new mongoose.Schema({
   },
   completed: {
     type: Boolean,
+    default: false,
   }
 }, {versionKey: false});
 
@@ -61,4 +62,4 @@ const schema = new mongoose.Schema({
 
 // });
 
-module.exports = mongoose.model('Todo', schema);
+module.exports = mongoose.model('Todo', schema).findByIdAndDelete();
