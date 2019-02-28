@@ -14,18 +14,18 @@ router.get('/:id',
 );
 
 router.post('/',
-  authenticate,
+  // authenticate,
   express.json(),
   contactCtrl.add
 );
 
 router.delete('/:id',
-  authenticate,
+  // authenticate,
   contactCtrl.delete,
 );
 
 router.put('/:id',
-  authenticate,
+  // authenticate,
   express.json(),
   contactCtrl.update,
 );

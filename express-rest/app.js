@@ -19,14 +19,14 @@ app.use('/api/contacts', contactRoutes);
 app.use('/api/todos', todoRoutes);
 app.use('/api/users', userRoutes);
 
-app.use('/api', (req, res) => {
+app.use('/api', (req, res, _) => {
   res.statusCode = 404;
   res.json({
     msg: req.notFoundReason || 'Not Found',
   });
 });
 
-app.use('/api', (err, req, res) => {
+app.use('/api', (err, req, res, _) => {
   res.statusCode = 500;
   res.json({
     msg: err.message,

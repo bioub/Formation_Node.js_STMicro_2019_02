@@ -54,7 +54,7 @@ const schema = new mongoose.Schema({
   completed: {
     type: Boolean,
   }
-});
+}, {versionKey: false});
 
 // Hooks / Middlewares / Trigger
 // schema.pre('save', () => {

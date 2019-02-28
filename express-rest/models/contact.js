@@ -1,3 +1,4 @@
+/*
 const contacts = [{
   prenom: 'Romain',
   id: 123,
@@ -72,3 +73,14 @@ exports.findById = findById;
 exports.create = create;
 exports.findByIdAndDelete = findByIdAndDelete;
 exports.findByIdAndUpdate = findByIdAndUpdate;
+*/
+const mongoose = require('mongoose');
+
+const schema = new mongoose.Schema({
+  prenom: {
+    type: String,
+    required: [true, 'Le prénom est obligatoire'],
+  },
+}, {versionKey: false});
+
+module.exports = mongoose.model('Contact', schema);
